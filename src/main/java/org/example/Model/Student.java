@@ -1,15 +1,15 @@
 package org.example.Model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Student {
     private int id;
     private String name;
     private String email;
-    private Date dob;
+    private LocalDate dob;
 
     public Student() {}
-    public Student(int id, String name, String email, Date dob) {
+    public Student(int id, String name, String email, LocalDate dob) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -17,7 +17,7 @@ public class Student {
     }
 
     // dung khi them moi thi khong co id
-    public Student(String name, String email, Date dob) {
+    public Student(String name, String email, LocalDate dob) {
         this.name = name;
         this.email = email;
         this.dob = dob;
@@ -47,11 +47,11 @@ public class Student {
         this.email = email;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
