@@ -1,14 +1,12 @@
 package org.example;
 
 import org.example.Model.Student;
-import org.example.Service.StudentService;
 import org.example.Service.StudentServiceImp;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -23,13 +21,13 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("\n=== QUẢN LÝ HỌC VIÊN ===");
-            System.out.println("1. Thêm học viên");
-            System.out.println("2. Hiển thị danh sách học viên");
-            System.out.println("3. Cập nhật email học viên");
-            System.out.println("4. Xóa học viên");
-            System.out.println("5. Thoát");
-            System.out.print("Chọn chức năng: ");
+            System.out.println("\n======= MENU =======");
+            System.out.println("1. Add student");
+            System.out.println("2. Display students list");
+            System.out.println("3. Update student's information");
+            System.out.println("4. Delete student");
+            System.out.println("0. Exit");
+            System.out.print("Choose option: ");
             int choice = scanner.nextInt();
 
             switch (choice) {
@@ -46,9 +44,67 @@ public class Main {
                     Student student = new Student(name, email, dob);
                     studentService.insertStudent(student);
                     break;
+
+                case 2:
+                    System.out.println("List students");
+                    System.out.println(studentService.displayStudents());
+                    break;
+
+                case 3:
+                    update(updateMenu());
+                    break;
+
                 default:
-                    System.out.println("ngu");
+                    System.out.println("You need to enter again!");
             }
         }
     }
+
+    private static int updateMenu() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n====== UPDATE MENU ======");
+        System.out.println("1. Update Name");
+        System.out.println("2. Update Email");
+        System.out.println("3. Update Date Of Birth");
+        System.out.println("0. Exit");
+        System.out.print("Choose option: ");
+        int updateChoice = scanner.nextInt();
+        return updateChoice;
+    }
+
+    private static void update(int updateChoice) throws SQLException {
+        StudentServiceImp studentService = new StudentServiceImp();
+        Scanner scanner = new Scanner(System.in);
+        switch (updateChoice) {
+            case 1:
+                System.out.println("Enter ID: ");
+                int id = scanner.nextInt();
+                scanner.nextLine(); // Đọc bỏ ký tự (\n) còn sót lại trong bộ đệm
+                System.out.println("Enter new name: ");
+                String newName = scanner.nextLine();
+                studentService.updateStudentName(id,newName);
+                break;
+
+            case 2:
+                System.out.println("Enter ID: ");
+                int idE = scanner.nextInt();
+                scanner.nextLine(); // Đọc bỏ ký tự (\n) còn sót lại trong bộ đệm
+                System.out.println("Enter new email: ");
+                String newE = scanner.nextLine();
+                studentService.updateStudentEmail(idE,newE);
+                break;
+
+            case 3: // update date of birth
+                System.out.println("Enter ID: ");
+                int idDate = scanner.nextInt();
+                scanner.nextLine(); // Đọc bỏ ký tự (\n) còn sót lại trong bộ đệm
+                System.out.println("Enter new date of birth (yyyy-MM-dd): ");
+                String newDate = scanner.nextLine();
+                studentService.updateStudentDob(idDate,newDate);
+                break;
+
+            case 0:
+        }
+    }
+
 }
