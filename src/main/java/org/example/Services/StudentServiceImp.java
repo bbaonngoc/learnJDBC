@@ -1,4 +1,4 @@
-package org.example.Service;
+package org.example.Services;
 
 import org.example.DBConnection;
 import org.example.Model.Student;
@@ -85,6 +85,16 @@ public class StudentServiceImp implements StudentService {
         System.out.println("Update successfully!");
     }
 
+    @Override
+    public void deleteStudent(int deleteId) throws SQLException {
+        String sql = "DELETE FROM students WHERE id = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1,deleteId);
+        ps.executeUpdate();
+        System.out.println("Remove successfully!");
+
+    }
+
     private Student mapRowToStudent(ResultSet resultSet) throws SQLException {
         return new Student(
                 resultSet.getInt("id"),
@@ -93,4 +103,5 @@ public class StudentServiceImp implements StudentService {
                 resultSet.getDate("dob").toLocalDate()
         );
     }
+
 }

@@ -1,7 +1,5 @@
-package org.example.Service;
-
+package org.example.Services;
 import org.example.Model.Student;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,4 +16,5 @@ public interface StudentService {
 
     void updateStudentDob(int idDate, String newDate) throws SQLException;
 
+    void deleteStudent(int deleteId) throws SQLException;
 }
