@@ -3,6 +3,7 @@ package org.example.Controllers;
 import org.example.Model.Student;
 import org.example.Services.StudentService;
 import org.example.Services.StudentServiceImp;
+import org.example.Views.BookView;
 import org.example.Views.StudentView;
 
 import java.sql.SQLException;
@@ -12,8 +13,7 @@ import java.util.Scanner;
 
 public class StudentController {
 
-    public StudentController() {}
-    private StudentService studentService;
+    private final StudentService studentService;
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
@@ -37,6 +37,10 @@ public class StudentController {
             case 4:
                 deleteStudent();
                 break;
+
+            case 5:
+                BookView bookView = new BookView();
+                bookView.bookMenu();
 
             case 0:
                 return;
@@ -106,6 +110,9 @@ public class StudentController {
 
             case 0:
                 break;
+
+            default:
+                System.out.println("Invalid choice");
         }
     }
 

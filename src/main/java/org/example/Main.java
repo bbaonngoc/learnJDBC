@@ -13,6 +13,8 @@ public class Main {
 
         StudentView studentView = new StudentView();
         studentView.mainView();
+
+
     }
 
 
